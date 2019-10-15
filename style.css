@@ -1,0 +1,388 @@
+/*
+Red colour: #B31B20
+Green colour:  rgb(0, 121, 129)
+*/
+
+html {
+    font-family:helvetica;
+    font-size:15px;
+}
+
+td {
+    border-bottom: 1px solid rgb(0, 30, 87);
+	border-top: 1px solid rgb(0, 30, 87);
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: white;
+    border-collapse: collapse;
+}
+
+th {
+    padding: 5px;
+    text-align: center;
+    vertical-align:middle;
+    background-color: rgb(238, 238, 238);
+	border-collapse: collapse;
+	background-color: #C4C4C4;
+}
+
+table {
+    border-collapse: collapse;
+    margin:auto;
+    width:400px;
+    max-width: 90%;
+}
+
+#inputTable{
+    border-bottom: 2px solid rgb(0, 30, 87);
+	border-top: 2px solid rgb(0, 30, 87);
+}
+
+.middleCol{
+    text-align:right;
+    font-size:0.9em;
+    font-style: italic;
+}
+
+#chartNotePara{
+    text-align:left;
+    font-size:0.9em;
+    font-style: italic;
+    width:95%;
+    max-width:800px;
+    margin:auto;    
+}
+
+.orangeText{
+    color: #F2AD00;
+    font-weight:bold;
+}
+
+.grayText{
+    color: rgb(94, 94, 94);
+    font-weight:bold;
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+::-webkit-scrollbar:vertical {
+    width: 12px;
+}
+
+::-webkit-scrollbar:horizontal {
+    height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;  
+    background-color: #ffffff; 
+}
+
+.userInput {
+    font-weight:bold;
+    padding:1px;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+    text-align:center;
+    font-family:helvetica;
+    width: 100px;
+    font-size: 0.95em;
+	max-width:80%;
+}
+
+/* styling for the custom percentile input cell */
+.userInput3 {
+    font-weight:bold;
+    padding:1px;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+    text-align:center;
+    font-family:helvetica;
+    width: 50px;
+    font-size: 0.95em;
+	max-width:80%;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(194, 194, 194);
+    opacity: 1; /* Firefox */
+    font-weight: normal;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(194, 194, 194);
+    font-weight: normal;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgb(194, 194, 194);
+    font-weight: normal;
+}
+
+input.input-number–noSpinners {
+    -moz-appearance: textfield;
+    border:1px solid rgb(180, 180, 180);
+    padding: 4px 0 4px 0;
+}
+
+input.input-number–noSpinners::-webkit-inner-spin-button,
+input.input-number–noSpinners::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    border:1px solid rgb(180, 180, 180);
+    padding: 4px 0 4px 0;
+}
+
+input:hover{
+    background-color: rgb(246, 252, 255);
+    border:1px solid rgb(146, 146, 146);
+}
+
+/* Default css */
+#yearRangeSliderDiv{
+    width: 300px;
+    max-width: 90%;
+    margin:auto;
+    padding: 1% 2% 1% 2%;
+    border: 2px dotted gray;
+    border-radius:5px;
+}
+
+/* conditional for screen size minimum of 700px */
+@media (min-width:700px) {
+    /* your conditional / responsive CSS inside this condition */
+    
+    #yearRangeSliderDiv{
+        width: 400px;
+        max-width: 90%;
+        margin:auto;
+        padding: 1% 2% 1% 2%;
+        border: 2px dotted gray;
+        border-radius:5px;
+    }
+}
+
+.sliderPara{
+    text-align:left;
+    font-size:0.9em;
+}
+
+#loanAssumptionTable{
+    font-size:0.95em;
+    width:500px;
+    max-width:95%;
+    border:2px solid #0071B3;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+#planInputTable{
+    width:500px;
+    max-width:95%;
+    border:2px solid rgb(114, 0, 129);   
+}
+
+.summaryTable {
+    width:500px;
+    max-width:95%;   
+}
+
+.rightAlignCell {
+    text-align: right;
+}
+
+.loanTable{
+    font-size:0.85em;
+    width:350px;
+    max-width:95%;
+    margin-bottom: 25px;
+}
+
+.loanBalanceCell{
+    font-weight: bold;
+}
+
+/*
+#loanDiv, #planDiv, #outputTextDiv, #summaryTableDiv, #chartDiv, #loanTableDiv {
+    text-align:center;
+    margin:auto;
+}
+*/
+
+#planDiv {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.tableHighlightRow {
+    font-weight:bold;
+    border-top: 2px solid #31D0CB;
+    border-bottom: 2px solid #31D0CB;
+}
+
+.outputTextContainerDiv {
+    text-align:center;
+    margin:auto;
+    padding: 2px 0 2px 0;
+}
+
+#outputTextDiv, #outputTextDiv2, #outputTextDiv3, #outputTextDiv4 {
+    width:500px;
+    max-width:95%;
+    background-color:white;
+    border: 2px solid rgb(0, 30, 87);
+    margin-top:15px;
+    margin-bottom:15px;
+    /*box-shadow: 4px 4px 10px grey;*/
+    text-align: left;
+    padding: 8px;
+    margin:auto;
+}
+
+#outputTextDiv ul li, #outputTextDiv2 ul li, #outputTextDiv3 ul li {
+    padding: 5px 0px;
+}
+
+#outputTextDiv p, #outputTextDiv2 p, #outputTextDiv3 p {
+    margin-bottom:0;
+}
+
+.highlightText{
+    font-weight: bold;
+    color: #00A08A;
+    font-size:1.2em;
+}
+
+.redHighlightText{
+    font-weight: bold;
+    color: #FF0000;
+    font-size:1.2em;
+}
+
+#advancedOptionsButton {
+    font-size: 0.9em;
+	font-weight: bold;
+	padding: 4px 8px 4px 8px;
+	border-radius: 4px;
+    display:block;
+    text-align:center;
+    margin:auto;
+    border:2px solid #5BBCD6;
+    color: #5BBCD6;
+    background-color: white;
+    cursor: pointer;
+}
+
+#advancedOptionsButton:hover{
+    border:2px solid #5BBCD6;
+    color: white;
+    background-color: #5BBCD6;    
+}
+
+#addLoanSpan {
+    color: #0071B3;
+    font-weight: bold;
+}
+
+#userMessageDiv {
+    width:500px;
+    max-width:95%;
+    border: 1px dashed rgb(100, 100, 100);
+    margin-top:15px;
+    margin-bottom:15px;
+    text-align:center;
+    margin:auto;
+    font-size: 1.2em;
+    background-image: linear-gradient(to right top, #ebebeb, #f0f0f0, #f5f5f5, #fafafa, #ffffff);
+}
+
+#outputErrorDiv{
+    width:500px;
+    max-width:95%;
+    background-image: linear-gradient(to right top, #ffdbdb, #fee4eb, #fbedf6, #fbf7fc, #ffffff);
+    border: 2px solid #B31B20;
+    padding:2%;
+    margin:auto;
+    text-align:center;
+    font-size: 1.2em;
+}
+
+#monthlyPaymentSpan, #monthlyPaymentInput, #paymentTypeSpan {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+#portfolioSequenceChartDiv, #focusYearDistributionChartDiv, #focusYearIRRDistributionChartDiv {
+    width:95%;
+    max-width:800px;
+    padding:6px;
+    border: 2px solid rgb(0, 30, 87);
+    background-color: white;
+    position:relative;
+    height:50vh;
+	max-height: 600px;
+    margin: auto;
+	text-align: center;
+    margin-top:15px;
+    margin-bottom:15px;
+    box-shadow: 4px 4px 10px grey;
+}
+
+.deleteIcon{
+    color:#B31B20;
+    cursor: pointer;
+}
+
+.loanTableTitle {
+    margin-top: 2%;
+}
+
+.loanTableSymbol{
+    cursor:pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: 1px solid rgb(0, 121, 129);
+    padding: 2px;
+    color: rgb(0, 121, 129);
+    margin-top:10px;
+}
+
+.hide {
+    display: none;
+}
+
+#monthlyPaymentDeltaInput{
+    width:60px;
+    max-width:75%;
+}
+
+#customPercentileNote{
+    font-size:0.9em;
+    font-style: italic;
+}
+
+#loadingImageDiv{
+    margin:auto;
+    text-align:center;
+}
+
+#loadingPara{
+    font-size:0.9em;
+    font-style: italic;  
+}
+
+.italicPara{
+    font-size:0.9em;
+    font-style: italic;  
+}

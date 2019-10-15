@@ -1,0 +1,242 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Market Volatility</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="range-slider-master/css/rSlider.min.css">
+</head>
+
+<body>
+
+    <h1>Market Volatility</h1>
+
+    <p class="introPara">Investing in the stock market through low-cost index funds (or ETFs) is widely accepted as a tried-and-true way to build wealth. It's the path I've chosen with my own money, and I recommend it wholeheartedly to you as well.</p>
+    <p class="introPara">That being said, with the <em>reward</em> comes the <em>risk</em>. Stock market returns are in a near constant state of zigging and zagging, and future market returns are extremely uncertain -- even in the long-term.</p>
+    <p class="introPara">To help you make plans in the midst of this uncertainty, you'll find an interactive tool below that plots out how your net worth might evolve in the future based on historical sequences of returns from U.S. stock market history.</p>
+    <p class="introPara">This tool uses a dataset of U.S. stock market returns covering the period of 1872 to 2018. Specifically, these returns are from the S&P composite index from 1872 to 1957, and the S&P 500 index onwards until 2018.</p>
+    <p class="introPara">The length of this dataset allows us to see how our portfolios would be impacted if key events from stock market history repeat themselves -- whether it's the great depression, dotcom bubble, or the financial crisis of 2008.</p>
+    <p class="introPara">In short: if we rely on the history of the U.S. stock market as a guide, how might our investments perform in the future?</p>
+    <p class="italicPara">Note: all dollar figures are shown on a "real dollar" basis (i.e., adjusted for inflation), and all market returns are shown on a "real total return" basis (i.e., adjusted for inflation and the re-investment of dividends).</p>
+
+    &nbsp;
+    <h2>Visualizing Market Volatility: An Interactive Tool</h2>
+
+    <div id="loadingImageDiv">
+        <img src="https://themeasureofaplan.com/wp-content/uploads/2019/10/copper-loader.gif" alt="Loading animation -- need inputs">
+        <p id="loadingPara">Please enter your assumptions below...</p>
+        
+        &nbsp;
+    </div>
+
+
+    <div id="inputDiv">
+        <table id="inputTable">
+            <tr>
+                <td><span id="initialContributionSpan">Initial Contribution</span></td>
+                <td class="middleCol">$</td>
+                <td><input type="number" id="initialContributionInput" class="userInput input-number–noSpinners" step=0.01 min=0 placeholder="5000"></td>
+            </tr>
+
+            <tr>
+                <td><span id="annualContributionSpan">Annual Contribution</span></td>
+                <td class="middleCol">$</td>
+                <td><input type="number" id="annualContributionInput" class="userInput input-number–noSpinners" step=0.01 min=0 placeholder="3000"></td>
+            </tr>
+
+            <tr>
+                <td><span id="timePeriodSpan">Time Period</span></td>
+                <td class="middleCol">Years</td>
+                <td><input type="number" id="timePeriodInput" class="userInput input-number–noSpinners" step=1 min=1 max=80 placeholder="10"></td>
+            </tr>
+        </table>
+    </div>
+
+    &nbsp;
+    <button onclick="toggleAdvancedOptions()" id="advancedOptionsButton">+ Advanced Options</button>
+
+    <div id="yearRangeSliderDiv">
+        <p class="sliderPara">This tool uses a dataset of U.S. stock market returns that stretches from 1872 to 2018 (147 years of returns!).</p>
+        <p class="sliderPara">By default, the tool will calculate historical sequences of returns using this entire dataset.</p>
+        <p class="sliderPara">However, you can use the slider bar below to narrow in on a specific period of returns (e.g., 1970 to 2018).</p>
+        &nbsp;
+        &nbsp;
+        <input type="text" id="yearRangeSlider"/>
+    </div>
+
+
+    <div id="masterOutputContainerDiv" class="hide">
+
+        <div id="portfolioSequenceChartDiv" tabindex="0">
+            <canvas id="portfolioSequenceChart"></canvas>
+        </div>
+
+        <p id="chartNotePara"></p>
+
+        <div id="focusYearInputDiv" class="hide">
+            <table id="focusYearInputTable">
+                <tr>
+                    <td>Focus Year</td>
+                    <td><select id="focusYearInput" class="userInput2"></select></td>
+                </tr>
+            </table>
+        </div>
+
+        &nbsp;
+
+
+        <div class="outputTextContainerDiv">
+            <div id="outputTextDiv">
+                <p id="outputPara1"></p>
+            </div>
+        </div>
+
+        <div class="outputTextContainerDiv">
+            <div id="outputTextDiv2">
+                <p id="outputPara2"></p>
+            </div>
+        </div>
+
+        <div class="outputTextContainerDiv">
+            <div id="outputTextDiv3">
+                <p id="outputPara3"></p>
+                <p id="outputPara4"></p>
+            </div>
+        </div>
+        
+        &nbsp;
+
+        <div id="focusYearDistributionChartDiv" tabindex="0">
+            <canvas id="focusYearDistributionChart"></canvas>
+        </div>
+
+        <div id="focusYearIRRDistributionChartDiv" tabindex="0">
+            <canvas id="focusYearIRRDistributionChart"></canvas>
+        </div>
+
+        &nbsp;
+
+        <div id="focusYearStatsDiv">
+
+            <table id="focusYearStatsTable">
+                <col width="100px">
+                <col width="150px">
+                <col width="150px">
+                <tr>
+                    <th colspan=3>Summary Stats</th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th>$</th>
+                    <th>Avg.<br>Annual Return</th>
+                </tr>
+                
+                <tr>
+                    <td>Min</td>
+                    <td id="minCell"></td>
+                    <td id="minIRRCell"></td>
+                </tr>
+
+                <tr>
+                    <td>Median</td>
+                    <td id="medianCell"></td>
+                    <td id="medianIRRCell"></td>
+                </tr>
+
+                <tr>
+                    <td>Average</td>
+                    <td id="averageCell"></td>
+                    <td id="averageIRRCell"></td>
+                </tr>
+
+                <tr>
+                    <td>Max</td>
+                    <td id="maxCell"></td>
+                    <td id="maxIRRCell"></td>
+                </tr>
+            </table>
+
+            &nbsp;
+
+            <table id="focusYearStatsTable2">
+                <col width="100px">
+                <col width="150px">
+                <col width="150px">
+                <tr>
+                    <th colspan=3>Percentile Stats</th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th>$</th>
+                    <th>Avg.<br>Annual Return</th>
+                </tr>
+                
+                <tr>
+                    <td>10th</td>
+                    <td id="pct10Cell"></td>
+                    <td id="pct10IRRCell"></td>
+                </tr>
+                
+                <tr>
+                    <td>25th</td>
+                    <td id="pct25Cell"></td>
+                    <td id="pct25IRRCell"></td>
+                </tr>
+                
+                <tr>
+                    <td>50th</td>
+                    <td id="pct50Cell"></td>
+                    <td id="pct50IRRCell"></td>
+                </tr>
+                
+                <tr>
+                    <td>75th</td>
+                    <td id="pct75Cell"></td>
+                    <td id="pct75IRRCell"></td>
+                </tr>
+                
+                <tr>
+                    <td>90th</td>
+                    <td id="pct90Cell"></td>
+                    <td id="pct90IRRCell"></td>
+                </tr>
+                <tr>
+                    <td><input type="number" id="customPercentileInput" class="userInput3 input-number–noSpinners" step=1 min=1 max=100></td>
+                    <td id="customPercentileCell"></td>
+                    <td id="customPercentileIRRCell"></td>
+                </tr>
+            </table>
+        </div>
+
+        <p id="customPercentileNote">Note: you can use the input cell above to display the portfolio $ value and % return metrics for any percentile rank (between 0 and 100).</p>
+    </div>
+
+    &nbsp;
+
+    <h2>Notes and Final Thoughts</h2>
+    <p>Your regular annual contributions are assumed to be made at the end of the year.</p>
+    <p>The figures for 'return per year' represent the annualized IRR of your portfolio.</p>
+    <p>This tool uses historical data from the U.S. stock market, with a period ranging from 1872 to 2018. In this case, the "U.S. stock market" refers to the S&P composite index from 1872 to 1957, and the S&P 500 index from 1957 and onwards.</p>
+    <p>The S&P composite returns have been meticulously collected and made available by <a href="http://www.econ.yale.edu/~shiller/data.htm" target="_blank" rel="noopener">Professor Robert Shiller</a>. The S&P 500 data was pulled from Yahoo Finance.</p>
+    <p>All of the returns are presented on a "real total return" basis, meaning that they are adjusted for inflation (i.e., real returns), and also adjusted for the re-investment of dividends received (i.e., total returns).</p>
+    <p>If you're hungry for more charts and analysis, I've written a seperate article covering the <a href="https://themeasureofaplan.com/us-stock-market-returns-1870s-to-present/" rel="noopener" target="_blank">history of the U.S. stock market</a>.</p>
+
+    &nbsp;
+    <p class="italicPara">--</p>
+    <p class="italicPara">Header image credit: <a href="https://mariahergueta.com/Punch-Magazine-5" rel="noopener" target="_blank">Maria Hergueta</a></p>
+    <p class="italicPara">Loading animation credit: <a href="https://dribbble.com/shots/2436386-Copper-Loader" target="_blank" rel="noopener">Jarod Erondu and Jeremy Goldberg</a></p>
+
+    &nbsp;
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.min.js"></script>
+<script src="range-slider-master/js/rSlider.min.js"></script>
+<script src="marketVolatilityScript.js"></script>
+
+</html>
