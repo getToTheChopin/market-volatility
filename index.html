@@ -214,6 +214,40 @@
         </div>
 
         <p id="customPercentileNote">Note: you can use the input cell above to display the portfolio $ value and % return metrics for any percentile rank (between 0 and 100).</p>
+
+        &nbsp;
+        
+        <div id="outputTableDiv">
+
+            <h2>Detailed Data Tables</h2>
+
+            <p class="tablePara">The table below shows the answers -- final portfolio value and average annual return -- for each and every one of the sequences. This allows you to pinpoint specific time periods in market history.</p>
+            <p class="tablePara">You can sort the table by "time" (going from the oldest sequences up to the present day) or by "value" (going from the sequences with the lowest returns up to the sequences with the highest returns).</p>
+
+            &nbsp;
+
+            <div id="tableSortDiv">
+                <span id="tableSortSpan">Sort the table by...<br></span>
+                &nbsp;
+
+                <div class="radio-toolbar">
+                    <input type="radio" class="userInput4" id="timeSort" name="sortType" value="timeSort" checked="checked"><label class="radioLabel" for="timeSort">Time (oldest to newest)</label><br>
+                    <input type="radio" class="userInput4" id="valueSort" name="sortType" value="valueSort"><label class="radioLabel" for="valueSort">Value (lowest to highest)</label>
+                </div>
+            </div>
+
+            &nbsp;
+
+
+            <table id="outputTable">
+                <tr>
+                    <th>Sequence</th>
+                    <th>Final Portfolio Value</th>
+                    <th>Avg. Annual Return</th>
+                </tr>
+            </table>
+        </div>
+
     </div>
 
     &nbsp;

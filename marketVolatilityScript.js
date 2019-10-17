@@ -27,6 +27,8 @@ var numSequences = 0;
 var upSequences = 0;
 var downSequences = 0;
 
+var tableSortType;
+
 var chart;
 var chart2;
 var chart3;
@@ -111,6 +113,9 @@ var chartNotePara = document.getElementById("chartNotePara");
 var loadingImageDiv = document.getElementById("loadingImageDiv");
 var masterOutputContainerDiv = document.getElementById("masterOutputContainerDiv");
 
+var outputTable = document.getElementById("outputTable");
+var tableNumCols = 3;
+
 
 //main method
 var inputsArray = document.getElementsByClassName("userInput");
@@ -131,11 +136,18 @@ for(i=0; i<inputsArray3.length; i++){
     console.log("add input event listener");
 }
 
+var inputsArray4 = document.getElementsByClassName("userInput4");
+for(i=0; i<inputsArray4.length; i++){
+    inputsArray4[i].addEventListener('change',refreshOutputTable, false);
+    console.log("add input event listener");
+}
+
 getUserInputs();
 calculateSequences();
 showOutputs();
 showFocusYearMetrics();
 showTextOutputs();
+showTableOutputs();
 
 
 function getUserInputs(){
@@ -201,6 +213,14 @@ function getUserInputs(){
     }
     focusYearInput.innerHTML = selectString;
 
+
+    //get sort type for the output table
+    if(document.getElementById("timeSort").checked){
+        tableSortType = "time";
+    } else {
+        tableSortType = "value";
+    }
+
 }
 
 function refreshAnalysis(){
@@ -243,11 +263,40 @@ function refreshAnalysis(){
     customPercentileCell.innerHTML = "";
     customPercentileIRRCell.innerHTML = "";
 
+    deleteTableRows();
+
     getUserInputs();
     calculateSequences();
     showOutputs();
     showFocusYearMetrics();
     showTextOutputs();
+    showTableOutputs();
+}
+
+function deleteTableRows(){
+        //delete all rows of output table except the header row
+        var tableRows = outputTable.getElementsByTagName('tr');
+        var rowCount = tableRows.length;
+    
+        for (var x=rowCount-1; x>0; x--) {
+            outputTable.removeChild(tableRows[x]);
+        }
+}
+
+function refreshOutputTable(){
+    console.log("refresh output table");
+
+    //get sort type for the output table
+    if(document.getElementById("timeSort").checked){
+        tableSortType = "time";
+    } else {
+        tableSortType = "value";
+    }
+
+    console.log("tableSortType: "+tableSortType);
+
+    deleteTableRows();
+    showTableOutputs();
 }
 
 function refreshFocusYearMetrics(){
@@ -1016,6 +1065,50 @@ function refreshCustomPercentile(){
     var customPercentileIRRValue = solveRate(timePeriod,annualContribution*-1,initialContribution*-1,customPercentileValue,0,IRRGuess);
 
     customPercentileIRRCell.innerHTML = (Math.round(customPercentileIRRValue*1000)/10).toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1})+"%";
+}
+
+
+function showTableOutputs(){
+
+    for(i=0; i<numSequences; i++){
+        var tableRow = document.createElement('tr');
+
+        tableRow.setAttribute('id','row'+(i+1));
+        outputTable.appendChild(tableRow);
+
+        for(j=0; j<tableNumCols; j++){
+            var tableCell = document.createElement('td');
+            tableCell.classList.add("tableCell");
+            tableCell.setAttribute('id','row'+(i+1)+'col'+(j+1));
+            tableRow.appendChild(tableCell);
+
+            if(j==0){
+                if(tableSortType == "time"){
+                    tableCell.innerHTML = sequenceLabelArray[i];
+                } else{
+                    tableCell.innerHTML = sequenceLabelArraySorted[i];
+                }
+            }
+
+            if(j==1){
+                if(tableSortType == "time"){ 
+                    tableCell.innerHTML = "$"+Math.round(focusYearPortfolioArray[i]).toLocaleString();
+                } else{
+                    tableCell.innerHTML = "$"+Math.round(focusYearPortfolioArraySorted[i]).toLocaleString();                
+                }             
+            }
+
+            if(j==2){
+                if(tableSortType == "time"){
+                    tableCell.innerHTML = (Math.round(focusYearIRRArray[i]*1000)/10).toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1})+"%";
+                } else{
+                    tableCell.innerHTML = (Math.round(focusYearIRRArraySorted[i]*1000)/10).toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1})+"%";
+                }                            
+            }
+
+        }
+    }
+
 }
 
 

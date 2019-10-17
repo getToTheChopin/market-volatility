@@ -386,3 +386,36 @@ input:hover{
     font-size:0.9em;
     font-style: italic;  
 }
+
+
+#tableSortDiv{
+    margin:auto;
+    text-align:center;
+}
+
+#tableSortSpan{
+    font-style: italic;  
+}
+
+/*radio button styling*/
+#timeSort, #valueSort {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+}
+
+.radioLabel {
+    display: inline-block;
+    background-color: rgb(255, 255, 255);
+    padding: 5px;
+    border: 2px solid rgb(104, 104, 104);
+    border-radius: 4px;
+    margin: 1px 0px 1px 0px;
+    cursor: pointer;
+}
+
+#timeSort:checked + label, #valueSort:checked + label {
+    background-color:rgb(244, 253, 255);
+    border-color: #5BBCD6;
+    font-weight:bold;
+}
